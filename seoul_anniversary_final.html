@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我們的首爾 · 五週年紀念 · Final</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Noto+Serif+TC:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F4EFE6;
+    --paper-warm: #EBE3D4;
+    --ink: #2A2622;
+    --ink-soft: #5A524A;
+    --ink-mute: #8E857B;
+    --rose: #C84A6E;
+    --rose-soft: #E89DAD;
+    --rose-bg: #F8E5EA;
+    --sage: #6B8265;
+    --sage-bg: #E5EBDB;
+    --gold: #B68E3D;
+    --gold-bg: #F1E5C8;
+    --sky: #5E7C9E;
+    --sky-bg: #DEE6EE;
+    --violet: #7960A0;
+    --violet-bg: #E5DDF0;
+    --border: rgba(42, 38, 34, 0.12);
+    --shadow: 0 1px 2px rgba(42, 38, 34, 0.04), 0 8px 24px rgba(42, 38, 34, 0.06);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Noto Serif TC", "Fraunces", serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(circle at 20% 30%, rgba(184, 142, 61, 0.04) 0, transparent 50%),
+                      radial-gradient(circle at 80% 70%, rgba(200, 74, 110, 0.03) 0, transparent 50%);
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 80px 24px 50px;
+    text-align: center;
+    position: relative;
+  }
+  .hero .ornament {
+    font-family: "Fraunces", serif;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--rose);
+    letter-spacing: 0.3em;
+    font-size: 11px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: "Fraunces", serif;
+    font-weight: 400;
+    font-size: clamp(38px, 7vw, 64px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--rose);
+    font-weight: 300;
+  }
+  .hero .subtitle {
+    color: var(--ink-soft);
+    font-size: 16px;
+    letter-spacing: 0.05em;
+    margin-top: 16px;
+  }
+  .hero .meta {
+    margin-top: 36px;
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 18px 28px;
+    justify-content: center;
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+  .hero .meta span { display: inline-flex; align-items: center; gap: 6px; }
+  .hero .meta strong { color: var(--ink); font-weight: 500; }
+
+  .final-stamp {
+    margin-top: 20px;
+    display: inline-block;
+    border: 1.5px solid var(--rose);
+    color: var(--rose);
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    transform: rotate(-2deg);
+  }
+
+  /* SECTION HEADING */
+  .section-heading {
+    text-align: center;
+    margin: 60px 0 32px;
+  }
+  .section-heading .label {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--rose);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .section-heading h2 {
+    font-family: "Fraunces", serif;
+    font-weight: 400;
+    font-size: clamp(24px, 4vw, 32px);
+    line-height: 1.3;
+  }
+  .section-heading h2 em { font-style: italic; color: var(--rose); }
+
+  /* TIMELINE */
+  .timeline { margin: 48px 0; }
+  .day-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 28px 28px 24px;
+    margin-bottom: 18px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .day-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--ink-mute);
+  }
+  .day-card[data-color="amber"]::before { background: var(--gold); }
+  .day-card[data-color="sage"]::before { background: var(--sage); }
+  .day-card[data-color="rose"]::before { background: var(--rose); }
+  .day-card[data-color="sky"]::before { background: var(--sky); }
+  .day-card[data-color="violet"]::before { background: var(--violet); }
+
+  .day-card.anniversary {
+    background: linear-gradient(135deg, #fff 0%, #FFF8FA 100%);
+    border: 1.5px solid var(--rose-soft);
+  }
+  .day-card.anniversary::before { width: 6px; }
+
+  .day-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 18px;
+  }
+  .day-number {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+  }
+  .day-title {
+    font-family: "Fraunces", serif;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 1.2;
+    margin-top: 4px;
+  }
+  .day-title em { font-style: italic; color: var(--rose); }
+  .day-date {
+    text-align: right;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    color: var(--ink-mute);
+    letter-spacing: 0.05em;
+  }
+  .day-date .big {
+    font-family: "Fraunces", serif;
+    font-size: 28px;
+    color: var(--ink);
+    display: block;
+    font-weight: 300;
+    letter-spacing: 0;
+  }
+  .anniversary-mark {
+    display: inline-block;
+    background: var(--rose);
+    color: #fff;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.2em;
+    padding: 4px 10px;
+    border-radius: 100px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  .schedule { margin-top: 16px; }
+  .item {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--border);
+    align-items: baseline;
+  }
+  .item:last-child { border-bottom: none; }
+  .item .time {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+    color: var(--ink-mute);
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+  }
+  .item .what { font-size: 14.5px; color: var(--ink); }
+  .item .what strong { font-weight: 500; }
+  .item .what .highlight {
+    background: linear-gradient(180deg, transparent 60%, var(--rose-bg) 60%);
+    padding: 0 2px;
+  }
+  .item .note {
+    display: block;
+    font-size: 12px;
+    color: var(--ink-mute);
+    font-style: italic;
+    margin-top: 2px;
+  }
+  .item.peak {
+    background: var(--rose-bg);
+    margin: 8px -10px;
+    padding: 12px 10px;
+    border-radius: 8px;
+    border-bottom: none;
+  }
+  .item.peak .what { font-weight: 500; color: var(--rose); }
+  .item.peak .what .highlight { background: rgba(200, 74, 110, 0.18); }
+
+  .day-footer {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-size: 12.5px;
+    color: var(--ink-soft);
+  }
+  .day-footer .meal-label {
+    color: var(--rose);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-right: 6px;
+  }
+
+  /* BUDGET */
+  .budget {
+    background: #fff;
+    border-radius: 20px;
+    padding: 28px;
+    margin: 32px 0;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+  }
+  .budget-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px dashed var(--border);
+    font-size: 14.5px;
+  }
+  .budget-row:last-child { border-bottom: none; }
+  .budget-row .label { color: var(--ink-soft); }
+  .budget-row .value {
+    font-family: "JetBrains Mono", monospace;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink);
+  }
+  .budget-row.total {
+    margin-top: 12px;
+    padding-top: 16px;
+    border-top: 2px solid var(--ink);
+    font-weight: 500;
+    font-size: 16px;
+  }
+  .budget-row.total .label { color: var(--rose); }
+
+  /* CHECKLIST */
+  .checklist {
+    background: #fff;
+    border-radius: 20px;
+    padding: 28px;
+    margin: 32px 0;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+  }
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px dashed var(--border);
+    cursor: pointer;
+    user-select: none;
+  }
+  .check-item:last-child { border-bottom: none; }
+  .check-box {
+    width: 20px;
+    height: 20px;
+    border: 1.5px solid var(--ink-mute);
+    border-radius: 6px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+  .check-item.done .check-box {
+    background: var(--rose);
+    border-color: var(--rose);
+  }
+  .check-item.done .check-box::after {
+    content: "✓";
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .check-item .check-label { flex: 1; font-size: 14.5px; }
+  .check-item.done .check-label {
+    text-decoration: line-through;
+    color: var(--ink-mute);
+  }
+  .check-item .check-when {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    color: var(--ink-mute);
+  }
+
+  /* TIPS */
+  .tips {
+    background: var(--paper-warm);
+    border-radius: 20px;
+    padding: 28px;
+    margin: 32px 0;
+    border: 1px dashed var(--gold);
+  }
+  .tips h3 {
+    font-family: "Fraunces", serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 20px;
+    margin-bottom: 16px;
+    color: var(--gold);
+  }
+  .tips ul { list-style: none; padding: 0; }
+  .tips li {
+    padding: 8px 0 8px 28px;
+    position: relative;
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+  .tips li::before {
+    content: "✦";
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    top: 8px;
+  }
+  .tips li strong { color: var(--ink); font-weight: 500; }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 80px 24px 60px;
+    color: var(--ink-mute);
+  }
+  .footer .ornament {
+    font-family: "Fraunces", serif;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--rose);
+    font-size: 28px;
+    margin-bottom: 8px;
+  }
+  .footer .msg {
+    font-family: "Fraunces", serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--ink-soft);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .day-card { animation: fadeUp 0.6s ease-out backwards; }
+
+  .toc {
+    position: sticky;
+    top: 0;
+    background: rgba(244, 239, 230, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 0;
+    z-index: 100;
+  }
+  .toc-inner {
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    padding: 0 24px;
+    max-width: 880px;
+    margin: 0 auto;
+    scrollbar-width: none;
+  }
+  .toc-inner::-webkit-scrollbar { display: none; }
+  .toc a {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--ink-mute);
+    text-decoration: none;
+    white-space: nowrap;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .toc a:hover { color: var(--rose); }
+
+  @media (max-width: 600px) {
+    .hero { padding: 60px 16px 40px; }
+    .container { padding: 0 16px; }
+    .day-card { padding: 22px 20px; }
+    .hero .meta { gap: 12px 20px; font-size: 12px; }
+    .item { grid-template-columns: 50px 1fr; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#itinerary">5 天行程</a>
+    <a href="#budget">預算</a>
+    <a href="#checklist">預約清單</a>
+    <a href="#tips">小提醒</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="ornament">5th Anniversary · Seoul 2026</div>
+  <h1>我們的 <em>首爾</em><br>五週年紀念</h1>
+  <p class="subtitle">2026 · 6/24 — 6/28</p>
+  <div class="meta">
+    <span>✈️ <strong>Jin Air</strong> 真航空</span>
+    <span>🏨 <strong>Daniel Campanella</strong> · 水踰</span>
+    <span>📅 <strong>5 天 4 夜</strong></span>
+  </div>
+  <div class="final-stamp">Final Version</div>
+</header>
+
+<div class="container">
+
+<section id="itinerary">
+  <div class="section-heading">
+    <div class="label">Itinerary</div>
+    <h2>5 天 4 夜 · <em>每日節奏</em></h2>
+  </div>
+
+  <div class="timeline">
+
+    <!-- DAY 1 -->
+    <div class="day-card" data-color="amber">
+      <div class="day-header">
+        <div>
+          <div class="day-number">Day 01 · 抵達日</div>
+          <div class="day-title">變美日 <em>·</em> 拍寫真</div>
+        </div>
+        <div class="day-date"><span class="big">24</span>6 月 · 週三</div>
+      </div>
+      <div class="schedule">
+        <div class="item"><span class="time">05:00</span><span class="what">抵達仁川 · 巴士 6101 進市區<span class="note">領 T-money、eSIM</span></span></div>
+        <div class="item"><span class="time">08:00</span><span class="what">飯店寄行李 · Paris Baguette 早餐補眠</span></div>
+        <div class="item"><span class="time">11:00</span><span class="what"><span class="highlight">Ai Hair 아이헤어</span> · 燙染剪<span class="note">我 4–5 hr · Jason 剪 30 min</span></span></div>
+        <div class="item"><span class="time">16:00</span><span class="what">回飯店 check-in · 換衣服</span></div>
+        <div class="item"><span class="time">17:00</span><span class="what"><span class="highlight">Candy Pop Studio</span> · 拍寫真 📸</span></div>
+        <div class="item"><span class="time">19:30</span><span class="what">弘大 <strong>肉典食堂 육전식당</strong> 🥩</span></div>
+      </div>
+      <div class="day-footer">
+        <span class="meal-label">餐</span>Paris Baguette · 본죽 · 肉典食堂(韓式燒肉)
+      </div>
+    </div>
+
+    <!-- DAY 2 -->
+    <div class="day-card" data-color="sage">
+      <div class="day-header">
+        <div>
+          <div class="day-number">Day 02 · 愛寶樂園</div>
+          <div class="day-title">瘋狂版 <em>·</em> 玩到午夜</div>
+        </div>
+        <div class="day-date"><span class="big">25</span>6 月 · 週四</div>
+      </div>
+      <div class="schedule">
+        <div class="item"><span class="time">08:00</span><span class="what">地鐵到江南 → 5002 巴士去愛寶</span></div>
+        <div class="item"><span class="time">10:30</span><span class="what">抵達 · 衝 <strong>T Express</strong> ⚡<span class="note">必排第一個,人潮會越來越多</span></span></div>
+        <div class="item"><span class="time">12:30</span><span class="what">🍔 <span class="highlight">Lotteria 樂園店</span><span class="note">韓國限定起司爆漿堡</span></span></div>
+        <div class="item"><span class="time">13:30</span><span class="what">🌹 <strong>玫瑰園</strong>(6 月底季節限定)❤️</span></div>
+        <div class="item"><span class="time">15:00</span><span class="what">Lost Valley 動物世界</span></div>
+        <div class="item"><span class="time">19:30</span><span class="what">🎆 <strong>月光遊行</strong></span></div>
+        <div class="item"><span class="time">20:30</span><span class="what">🎇 <strong>夜間煙火秀</strong></span></div>
+        <div class="item"><span class="time">21:30</span><span class="what">5002 巴士回首爾</span></div>
+        <div class="item"><span class="time">23:00</span><span class="what">🍔 <span class="highlight">Shake Shack Doota 東大門</span><span class="note">末班宵夜 · Jason 朝聖</span></span></div>
+        <div class="item"><span class="time">00:30</span><span class="what">4 號線回飯店,倒下 💤</span></div>
+      </div>
+      <div class="day-footer">
+        <span class="meal-label">餐</span>便利商店早 · Lotteria 午 · Shake Shack 晚 + 宵夜
+      </div>
+    </div>
+
+    <!-- DAY 3 - ANNIVERSARY -->
+    <div class="day-card anniversary" data-color="rose">
+      <span class="anniversary-mark">♡ 5th Anniversary</span>
+      <div class="day-header">
+        <div>
+          <div class="day-number">Day 03 · 紀念日</div>
+          <div class="day-title">聖水 <em>·</em> 漢南 <em>·</em> 南山塔</div>
+        </div>
+        <div class="day-date"><span class="big">26</span>6 月 · 週五</div>
+      </div>
+      <div class="schedule">
+        <div class="item"><span class="time">10:00</span><span class="what">慢慢起床<span class="note">Day 2 晚回</span></span></div>
+        <div class="item"><span class="time">11:30</span><span class="what">聖水洞 <strong>Café Layered</strong> ☕</span></div>
+        <div class="item"><span class="time">14:00</span><span class="what">聖水韓式定食(輕量) 청기와타운</span></div>
+        <div class="item"><span class="time">15:30</span><span class="what"><strong>Nudake 聖水店</strong> · 大林倉庫逛街</span></div>
+        <div class="item"><span class="time">17:30</span><span class="what">回飯店補妝 · 換週年餐衣服</span></div>
+        <div class="item"><span class="time">19:00</span><span class="what">計程車到漢南洞</span></div>
+        <div class="item peak"><span class="time">19:40</span><span class="what"><span class="highlight">🥩 肉類流氓 漢南店 · 五週年餐</span><span class="note">已預約 ✓</span></span></div>
+        <div class="item"><span class="time">21:30</span><span class="what"><strong>N 首爾塔</strong> · 夜景 · 愛情鎖 ❤️<span class="note">距離漢南店車程 5 分鐘</span></span></div>
+        <div class="item"><span class="time">23:30</span><span class="what">回飯店</span></div>
+      </div>
+      <div class="day-footer">
+        <span class="meal-label">餐</span>Café Layered · 청기와타운 · Nudake · <strong style="color: var(--rose);">肉類流氓(週年餐 ❤)</strong>
+      </div>
+    </div>
+
+    <!-- DAY 4 -->
+    <div class="day-card" data-color="sky">
+      <div class="day-header">
+        <div>
+          <div class="day-number">Day 04 · 歷史見證</div>
+          <div class="day-title">DMZ <em>·</em> 南北韓交界</div>
+        </div>
+        <div class="day-date"><span class="big">27</span>6 月 · 週六</div>
+      </div>
+      <div class="schedule">
+        <div class="item"><span class="time">07:00</span><span class="what">DMZ 一日遊巴士集合<span class="note">記得帶護照!</span></span></div>
+        <div class="item"><span class="time">09:30</span><span class="what">臨津閣公園</span></div>
+        <div class="item"><span class="time">11:00</span><span class="what"><span class="highlight">第三隧道</span></span></div>
+        <div class="item"><span class="time">13:00</span><span class="what">含團午餐</span></div>
+        <div class="item"><span class="time">14:00</span><span class="what"><strong>都羅山觀察台</strong> · 都羅山車站</span></div>
+        <div class="item"><span class="time">16:00</span><span class="what">返回首爾</span></div>
+        <div class="item"><span class="time">18:30</span><span class="what">🦞 <span class="highlight">鷺梁津水產市場</span><span class="note">1F 選海鮮 → 2F 烹調</span></span></div>
+        <div class="item"><span class="time">22:00</span><span class="what">回飯店</span></div>
+      </div>
+      <div class="day-footer">
+        <span class="meal-label">餐</span>便利商店早 · 含團午 · 鷺梁津水產市場(生魚片+蒸蛤蜊+辣魚湯)
+      </div>
+    </div>
+
+    <!-- DAY 5 -->
+    <div class="day-card" data-color="violet">
+      <div class="day-header">
+        <div>
+          <div class="day-number">Day 05 · 回程</div>
+          <div class="day-title">醬蟹 <em>·</em> 生魚片 <em>·</em> 採買</div>
+        </div>
+        <div class="day-date"><span class="big">28</span>6 月 · 週日</div>
+      </div>
+      <div class="schedule">
+        <div class="item"><span class="time">10:00</span><span class="what">退房 · 行李寄櫃台</span></div>
+        <div class="item"><span class="time">11:00</span><span class="what">🦀 <span class="highlight">烏達里家 醬蟹</span>(早午餐)</span></div>
+        <div class="item"><span class="time">12:30</span><span class="what">漢南 Tamburins · Nudake 本店</span></div>
+        <div class="item"><span class="time">14:30</span><span class="what">🍣 <span class="highlight">米米명가 米其林生魚片</span></span></div>
+        <div class="item"><span class="time">16:00</span><span class="what">明洞最後採買 · Olive Young</span></div>
+        <div class="item"><span class="time">18:30</span><span class="what">AREX 機場快線到仁川</span></div>
+        <div class="item"><span class="time">22:40</span><span class="what">起飛 ✈️</span></div>
+        <div class="item"><span class="time">00:10</span><span class="what">抵達桃園</span></div>
+      </div>
+      <div class="day-footer">
+        <span class="meal-label">餐</span>烏達里家(醬蟹)· 米米명가(米其林生魚片)
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="budget">
+  <div class="section-heading">
+    <div class="label">Budget</div>
+    <h2>兩人 <em>總花費</em></h2>
+  </div>
+  <div class="budget">
+    <div class="budget-row"><span class="label">飯店 4 晚(水踰)</span><span class="value">₩ 320,000</span></div>
+    <div class="budget-row"><span class="label">美髮(燙+染+剪)</span><span class="value">₩ 280,000</span></div>
+    <div class="budget-row"><span class="label">寫真館</span><span class="value">₩ 120,000</span></div>
+    <div class="budget-row"><span class="label">愛寶樂園(門票+巴士)</span><span class="value">₩ 140,000</span></div>
+    <div class="budget-row"><span class="label">DMZ 一日遊</span><span class="value">₩ 140,000</span></div>
+    <div class="budget-row"><span class="label">餐飲 5 天(含週年餐)</span><span class="value">₩ 760,000</span></div>
+    <div class="budget-row"><span class="label">交通+雜支</span><span class="value">₩ 100,000</span></div>
+    <div class="budget-row total"><span class="label">總計(不含機票/購物)</span><span class="value">₩ 1,860,000 ≈ NT$ 45,200</span></div>
+  </div>
+</section>
+
+<section id="checklist">
+  <div class="section-heading">
+    <div class="label">To-do Before Trip</div>
+    <h2>行前 <em>預約清單</em></h2>
+  </div>
+  <div class="checklist">
+    <div class="check-item" onclick="this.classList.toggle('done')">
+      <div class="check-box"></div>
+      <span class="check-label">Ai Hair 美髮預約</span>
+      <span class="check-when">6/24 · 11:00</span>
+    </div>
+    <div class="check-item" onclick="this.classList.toggle('done')">
+      <div class="check-box"></div>
+      <span class="check-label">Candy Pop Studio 寫真</span>
+      <span class="check-when">6/24 · 17:00</span>
+    </div>
+    <div class="check-item" onclick="this.classList.toggle('done')">
+      <div class="check-box"></div>
+      <span class="check-label">愛寶樂園門票 + 5002 巴士</span>
+      <span class="check-when">6/25 · KKday/Klook</span>
+    </div>
+    <div class="check-item done" onclick="this.classList.toggle('done')">
+      <div class="check-box"></div>
+      <span class="check-label">肉類流氓 漢南店 · 週年餐</span>
+      <span class="check-when">6/26 · 19:40</span>
+    </div>
+    <div class="check-item" onclick="this.classList.toggle('done')">
+      <div class="check-box"></div>
+      <span class="check-label">DMZ 一日遊</span>
+      <span class="check-when">6/27 · KKday/Klook</span>
+    </div>
+    <div class="check-item" onclick="this.classList.toggle('done')">
+      <div class="check-box"></div>
+      <span class="check-label">烏達里家 醬蟹</span>
+      <span class="check-when">6/28 · 11:00 · Catch Table</span>
+    </div>
+    <div class="check-item" onclick="this.classList.toggle('done')">
+      <div class="check-box"></div>
+      <span class="check-label">米米명가 生魚片</span>
+      <span class="check-when">6/28 · 14:30 · Catch Table</span>
+    </div>
+  </div>
+</section>
+
+<section id="tips">
+  <div class="section-heading">
+    <div class="label">Tips</div>
+    <h2>給自己的 <em>小提醒</em></h2>
+  </div>
+  <div class="tips">
+    <h3>出發前 ✦ 記得這些</h3>
+    <ul>
+      <li><strong>6/24 超緊湊</strong> · 凌晨抵達+做頭髮+寫真同日,進市區後先補眠 1.5 hr</li>
+      <li><strong>髮型參考照</strong> · 出發前準備 2–3 張,韓國設計師看圖最快</li>
+      <li><strong>染髮前一天不洗頭</strong> · 頭皮油脂可保護</li>
+      <li><strong>Day 2 末班宵夜</strong> · Shake Shack Doota 營業到午夜,愛寶巴士回江南後搭 2 號線到東大門</li>
+      <li><strong>Day 3 漢南→南山塔</strong> · 車程只要 5 分鐘,計程車最方便</li>
+      <li><strong>DMZ 必帶護照</strong> · 沒帶不能進管制區</li>
+      <li><strong>愛寶 T Express</strong> · 一早衝第一個玩,人潮會越來越多</li>
+      <li><strong>機場巴士 6101</strong> · 仁川→水踰直達,凌晨班次約 6:10 開始</li>
+    </ul>
+  </div>
+</section>
+
+</div>
+
+<footer class="footer">
+  <div class="ornament">♡</div>
+  <p class="msg">慢慢吃 · 慢慢走 · 留下好多回憶</p>
+  <p style="margin-top: 12px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--ink-mute);">HAPPY 5TH ANNIVERSARY</p>
+</footer>
+
+</body>
+</html>
